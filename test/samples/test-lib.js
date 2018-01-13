@@ -1,3 +1,7 @@
 (function() {
-  console.info('test-lib loaded!')
+  window.testLib = () => {
+    return true
+  }
+
+  testLib()
 }())

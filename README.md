@@ -1,21 +1,72 @@
-# \<async-script\>
+# \<async-script\> [WIP]
 
-Asynchronously load scripts that survive vulcanisation/bundling
+[![Build Status](https://travis-ci.org/TheProfs/async-script.svg?branch=master)](https://travis-ci.org/TheProfs/async-script)
 
-## Install the Polymer-CLI
+Asynchronously load scripts that survive vulcanisation/bundling.
 
-First, make sure you have the [Polymer CLI](https://www.npmjs.com/package/polymer-cli) installed. Then run `polymer serve` to serve your element locally.
+## Usage
 
-## Viewing Your Element
+### Basic
 
+In the below example, `testLib` will be loaded *after* the element is attached,
+regardless if this element was vulcanised/bundled.
+
+In short, the `src` is not included in any bundles.
+
+```html
+<async-script src="/lib/test-lib.js"></async-script>
 ```
-$ polymer serve
+
+**Important:** All non-`http`/`https` scripts are passed through
+[`this.resolveUrl()`][resolve-url] to resolve their relative path.
+
+### Multiple scripts
+
+You can provide multiple `src`'s by separating them with a comma.
+
+```html
+<async-script src="/lib/foo.js, /lib/bar.js"></async-script>
 ```
 
-## Running Tests
+### Non-local scripts
+
+Providing an `src` that includes `http`/`https` will not attempt to resolve it
+relatively(i.e using `this.resolveUrl(src)`), therefore keeping it intact.
+
+```html
+<async-script src="http://foo-cdn.com/foo-lib.js"></async-script>
+```
+
+### Status Events
+
+The element will fire `load`/`error` events where appropriate:
+
+```javascript
+
+// Success, all srcs have loaded
+document.querySelector('async-script').addEventListener('load', () => {
+  console.log('loaded')
+})
+
+// Error, at least 1 src has failed to load
+document.querySelector('async-script').addEventListener('error', e => {
+  console.error(e.detail)
+})
+```
+
+## Tests
 
 ```
 $ polymer test
 ```
 
-Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+## License
+
+MIT License
+
+## Authors
+
+- [The Profs][the-profs]
+
+[resolve-url]: https://www.polymer-project.org/1.0/docs/api/Polymer.Base#method-resolveUrl
+[the-profs]: https://github.com/TheProfs

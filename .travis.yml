@@ -1,0 +1,24 @@
+language: node_js
+sudo: required
+before_script:
+  - npm install -g web-component-tester
+  - npm install -g bower polymer-cli@0.18.1
+  - sudo mv /usr/bin/google-chrome /usr/bin/google-chrome-old
+  - sudo mv /usr/bin/google-chrome-beta /usr/bin/google-chrome
+node_js: stable
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-beta
+script:
+  - npm install
+  - cd isomorphic-model
+  - bower install --silent
+  - cd ..
+  - mocha test
+  - cd isomorphic-model
+  - xvfb-run polymer test -l chrome
+
+dist: trusty

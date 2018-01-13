@@ -8,14 +8,7 @@ Asynchronously load scripts that survive vulcanisation/bundling
 -->
 
 <dom-module id="async-script">
-  <template>
-    <style>
-      :host {
-        display: block;
-      }
-    </style>
-    <h2>Hello [[prop1]]!</h2>
-  </template>
+  <template></template>
 
   <script>
     Polymer({
@@ -49,6 +42,10 @@ Asynchronously load scripts that survive vulcanisation/bundling
 
       attached: function() {
         window.asyncScript = this
+
+        this.async(() => {
+          if (!this.src) this._notifyLoad()
+        }, 10)
       },
 
       _loadSources: function(sources) {
@@ -75,7 +72,6 @@ Asynchronously load scripts that survive vulcanisation/bundling
       },
 
       _notifyError: function(err) {
-        console.error(`${this.name} load error`, err)
         this.fire('error', err)
       },
 

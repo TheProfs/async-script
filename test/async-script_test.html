@@ -19,10 +19,89 @@
     </test-fixture>
 
     <script>
-      suite('Basic Tests', function() {
-        test('instantiating the element works', function() {
-          var element = fixture('basic');
-          assert.equal(element.is, 'async-script');
+      describe('Basic Tests', () => {
+        let element
+
+        beforeEach(() => {
+          element = fixture('basic')
+        })
+
+        describe('instantiating the element works', () => {
+          it('instantiates', () => {
+            expect(element).to.be.ok
+          })
+        })
+
+        describe('passing a single src', () => {
+          it('fires the load event', done => {
+            element.addEventListener('load', e => {
+              done()
+            })
+
+            element.setAttribute('src', '/test/samples/test-lib.js')
+          })
+
+          it('loads the script', done => {
+            element.addEventListener('load', e => {
+              expect(testLib).to.be.ok
+              done()
+            })
+
+            element.setAttribute('src','/test/samples/test-lib.js')
+          })
+        })
+
+        describe('passing multiple comma-separated local srcs', () => {
+          it('fires the load event', done => {
+            element.addEventListener('load', e => {
+              done()
+            })
+
+            element.setAttribute(
+              'src',
+              'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js, /test/samples/test-lib.js'
+            )
+          })
+
+          it('loads the scripts', done => {
+            element.addEventListener('load', e => {
+              expect($).to.be.ok
+              expect(testLib).to.be.ok
+              done()
+            })
+
+            element.setAttribute(
+              'src',
+              'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js, /test/samples/test-lib.js'
+            )
+          })
+        })
+
+        describe('passing an erroneous source', () => {
+          it('fires the error event', done => {
+            element.addEventListener('error', e => {
+              done()
+            })
+
+            element.setAttribute('src', 'foobarfoo.js')
+          })
+
+          it('does not fire the load event', done => {
+            element.addEventListener('load', e => {
+              done(`'load' event fired, expected only 'error' event to fire`)
+            })
+
+            element.setAttribute('src', 'foobarfoo.js')
+            done()
+          })
+        })
+
+        describe('not passing a src', () => {
+          it('fires the load event', done => {
+            element.addEventListener('load', e => {
+              done()
+            })
+          })
         })
       })
     </script>
