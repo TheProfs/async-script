@@ -1,6 +1,6 @@
 # \<async-script\>
 
-Asynchronously load scripts that survive vulcanisation/bundling Edit
+Asynchronously load scripts that survive vulcanisation/bundling
 
 ## Install the Polymer-CLI
 
