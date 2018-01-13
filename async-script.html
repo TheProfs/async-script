@@ -23,12 +23,65 @@ Asynchronously load scripts that survive vulcanisation/bundling
       is: 'async-script',
 
       properties: {
-        prop1: {
-          type: String,
-          value: 'async-script',
+        src: {
+          type: String
         },
+
+        sources: {
+          type: Array,
+          computed: '_splitSrcString(src)',
+          observer: '_loadSources'
+        },
+
+        loaded: {
+          type: Boolean,
+          value: false,
+          reflectToAttribute: true,
+          readOnly: true
+        },
+
+        loadedSourcesCount: {
+          type: Number,
+          value: 0,
+          readOnly: true
+        }
       },
 
+      attached: function() {
+        window.asyncScript = this
+      },
+
+      _loadSources: function(sources) {
+        sources.forEach(this._loadScript.bind(this))
+      },
+
+      _loadScript: function(src) {
+        this.async(() => {
+          const script = document.createElement('script')
+          script.addEventListener('error', this._notifyError.bind(this))
+          script.addEventListener('load', () => {
+            this._setLoadedSourcesCount(++this.loadedSourcesCount)
+            if (this.loadedSourcesCount >= this.sources.length) this._notifyLoad()
+          })
+
+          script.setAttribute('src', src.includes('http') ? src : this.resolveUrl(src))
+          window.document.body.appendChild(script)
+        }, 10)
+      },
+
+      _notifyLoad: function() {
+        this._setLoaded(true)
+        this.fire('load')
+      },
+
+      _notifyError: function(err) {
+        console.error(`${this.name} load error`, err)
+        this.fire('error', err)
+      },
+
+      _splitSrcString: function(src) {
+        return src.split(',')
+      }
     });
   </script>
 </dom-module>
