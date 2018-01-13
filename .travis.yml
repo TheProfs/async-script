@@ -7,6 +7,7 @@ before_script:
   - sudo mv /usr/bin/google-chrome-beta /usr/bin/google-chrome
 node_js: stable
 addons:
+  firefox: latest
   apt:
     sources:
       - google-chrome
@@ -14,11 +15,6 @@ addons:
       - google-chrome-beta
 script:
   - npm install
-  - cd isomorphic-model
   - bower install --silent
-  - cd ..
-  - mocha test
-  - cd isomorphic-model
-  - xvfb-run polymer test -l chrome
-
+  - xvfb-run polymer test
 dist: trusty
