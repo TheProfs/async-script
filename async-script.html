@@ -1,0 +1,34 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<!--
+`async-script`
+Asynchronously load scripts that survive vulcanisation/bundling
+
+@demo demo/index.html
+-->
+
+<dom-module id="async-script">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'async-script',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'async-script',
+        },
+      },
+
+    });
+  </script>
+</dom-module>
