@@ -60,13 +60,13 @@ document.querySelector('async-script').addEventListener('error', e => {
 $ polymer test
 ```
 
-## License
-
-MIT License
-
 ## Authors
 
 - [The Profs][the-profs]
+
+## License
+
+MIT License
 
 [resolve-url]: https://www.polymer-project.org/1.0/docs/api/Polymer.Base#method-resolveUrl
 [the-profs]: https://github.com/TheProfs
