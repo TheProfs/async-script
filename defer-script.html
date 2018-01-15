@@ -55,13 +55,15 @@
       _loadScript: function(src) {
         this.async(() => {
           const script = document.createElement('script')
+          const root = this.dataHost ? this.dataHost : this
+
           script.addEventListener('error', this._notifyError.bind(this))
           script.addEventListener('load', () => {
             this._setLoadedSourcesCount(++this.loadedSourcesCount)
             if (this.loadedSourcesCount >= this.sources.length) this._notifyLoad()
           })
 
-          script.setAttribute('src', src.includes('http') ? src : this.resolveUrl(src))
+          script.setAttribute('src', src.includes('http') ? src : root.resolveUrl(src))
           window.document.body.appendChild(script)
         }, 10)
       },
