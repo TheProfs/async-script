@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/TheProfs/defer-script.svg?branch=master)](https://travis-ci.org/TheProfs/defer-script)
 
- Load deferred scripts that survive vulcanisation/bundling.
+Load deferred scripts that survive vulcanisation/bundling.
 
 ## Usage
 
