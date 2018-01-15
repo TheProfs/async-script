@@ -1,4 +1,4 @@
-# \<defer-script\> [WIP]
+# \<defer-script\>
 
 [![Build Status](https://travis-ci.org/TheProfs/defer-script.svg?branch=master)](https://travis-ci.org/TheProfs/defer-script)
 
