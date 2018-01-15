@@ -41,9 +41,16 @@ relatively(i.e using `this.resolveUrl(src)`), therefore keeping it intact.
 <defer-script src="http://foo-cdn.com/foo-lib.js"></defer-script>
 ```
 
-### Status Events
+### Checking load status
 
-The element will fire `load`/`error` events where appropriate:
+When all `src`s have loaded successfully, a `loaded` attribute will be added
+to the element.
+
+```html
+<defer-script src="/lib/foo.js, /lib/bar.js" loaded></defer-script>
+```
+
+The element will also fire `load`/`error` events where appropriate:
 
 ```javascript
 
