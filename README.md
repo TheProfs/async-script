@@ -6,6 +6,10 @@ Load deferred scripts that survive vulcanisation/bundling.
 
 ## Usage
 
+```bash
+$ bower install --save defer-script
+```
+
 ### Basic
 
 In the below example, `testLib` will be loaded *after* the element is attached,
