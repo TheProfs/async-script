@@ -32,15 +32,6 @@ You can provide multiple `src`'s by separating them with a comma.
 <defer-script src="/lib/foo.js, /lib/bar.js"></defer-script>
 ```
 
-### Non-local scripts
-
-Providing an `src` that includes `http`/`https` will not attempt to resolve it
-relatively(i.e using `this.resolveUrl(src)`), therefore keeping it intact.
-
-```html
-<defer-script src="http://foo-cdn.com/foo-lib.js"></defer-script>
-```
-
 ### Checking load status
 
 When all `src`s have loaded successfully, a `loaded` attribute will be added
