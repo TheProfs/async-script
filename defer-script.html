@@ -1,19 +1,19 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <!--
-`async-script`
-Asynchronously load scripts that survive vulcanisation/bundling
+`defer-script`
+ Load deferred scripts that survive vulcanisation/bundling
 
 @demo demo/index.html
 -->
 
-<dom-module id="async-script">
+<dom-module id="defer-script">
   <template></template>
 
   <script>
     Polymer({
 
-      is: 'async-script',
+      is: 'defer-script',
 
       properties: {
         src: {
@@ -41,7 +41,7 @@ Asynchronously load scripts that survive vulcanisation/bundling
       },
 
       attached: function() {
-        window.asyncScript = this
+        window.deferScript = this
 
         this.async(() => {
           if (!this.src) this._notifyLoad()

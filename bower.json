@@ -1,7 +1,8 @@
 {
-  "name": "async-script",
-  "description": "Asynchronously load scripts that survive vulcanisation/bundling",
-  "main": "async-script.html",
+  "name": "defer-script",
+  "version": "0.1.0",
+  "description": "Defer scripts that survive vulcanisation/bundling",
+  "main": "defer-script.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0"
   },

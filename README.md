@@ -1,8 +1,8 @@
-# \<async-script\> [WIP]
+# \<defer-script\> [WIP]
 
-[![Build Status](https://travis-ci.org/TheProfs/async-script.svg?branch=master)](https://travis-ci.org/TheProfs/async-script)
+[![Build Status](https://travis-ci.org/TheProfs/defer-script.svg?branch=master)](https://travis-ci.org/TheProfs/defer-script)
 
-Asynchronously load scripts that survive vulcanisation/bundling.
+ Load deferred scripts that survive vulcanisation/bundling.
 
 ## Usage
 
@@ -14,7 +14,7 @@ regardless if this element was vulcanised/bundled.
 In short, the `src` is not included in any bundles.
 
 ```html
-<async-script src="/lib/test-lib.js"></async-script>
+<defer-script src="/lib/test-lib.js"></defer-script>
 ```
 
 **Important:** All non-`http`/`https` scripts are passed through
@@ -25,7 +25,7 @@ In short, the `src` is not included in any bundles.
 You can provide multiple `src`'s by separating them with a comma.
 
 ```html
-<async-script src="/lib/foo.js, /lib/bar.js"></async-script>
+<defer-script src="/lib/foo.js, /lib/bar.js"></defer-script>
 ```
 
 ### Non-local scripts
@@ -34,7 +34,7 @@ Providing an `src` that includes `http`/`https` will not attempt to resolve it
 relatively(i.e using `this.resolveUrl(src)`), therefore keeping it intact.
 
 ```html
-<async-script src="http://foo-cdn.com/foo-lib.js"></async-script>
+<defer-script src="http://foo-cdn.com/foo-lib.js"></defer-script>
 ```
 
 ### Status Events
@@ -44,12 +44,12 @@ The element will fire `load`/`error` events where appropriate:
 ```javascript
 
 // Success, all srcs have loaded
-document.querySelector('async-script').addEventListener('load', () => {
+document.querySelector('defer-script').addEventListener('load', () => {
   console.log('loaded')
 })
 
 // Error, at least 1 src has failed to load
-document.querySelector('async-script').addEventListener('error', e => {
+document.querySelector('defer-script').addEventListener('error', e => {
   console.error(e.detail)
 })
 ```
