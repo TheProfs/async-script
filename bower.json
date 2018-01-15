@@ -1,6 +1,6 @@
 {
   "name": "defer-script",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Defer scripts that survive vulcanisation/bundling",
   "main": "defer-script.html",
   "dependencies": {
