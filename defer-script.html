@@ -78,7 +78,7 @@
       },
 
       _splitSrcString: function(src) {
-        return src.split(',')
+        return src.split(',').map(src => src.trim())
       }
     });
   </script>
